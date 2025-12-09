@@ -1,243 +1,180 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-/* Navbar */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background-color: #222;
-    color: #ffd700; /* Gold/Yellow */
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    margin-right: 20px;
-    font-weight: 500;
-}
-
-.cart-btn {
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-}
-
-#cart-count {
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background: #ffd700;
-    color: #222;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-/* Hero Section */
-.hero {
-    height: 60vh;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
-
-.hero button {
-    padding: 10px 25px;
-    background-color: #ffd700;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-top: 15px;
-    transition: 0.3s;
-}
-
-.hero button:hover {
-    background-color: #e6c200;
-}
-
-/* Filters */
-.filters {
-    display: flex;
-    justify-content: center;
-    padding: 2rem;
-    gap: 15px;
-}
-
-.filter-btn {
-    padding: 8px 20px;
-    border: 2px solid #222;
-    background: transparent;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 20px;
-}
-
-.filter-btn.active, .filter-btn:hover {
-    background: #222;
-    color: #ffd700;
-}
-
-/* Food Grid */
-.food-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 2rem 5%;
-}
-
-.food-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-}
-
-.food-card:hover {
-    transform: translateY(-5px);
-}
-
-.food-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.food-info {
-    padding: 15px;
-}
-
-.food-info h3 {
-    margin-bottom: 5px;
-}
-
-.food-info p {
-    color: #777;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-}
-
-.price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.price {
-    font-weight: bold;
-    color: #222;
-}
-
-.add-btn {
-    padding: 5px 15px;
-    background-color: #222;
-    color: #ffd700;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Cart Modal */
-.cart-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: none; /* Hidden by default */
-    justify-content: flex-end;
-    z-index: 1000;
-}
-
-.cart-modal {
-    width: 350px;
-    background: white;
-    height: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-
-.close-btn {
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.cart-items {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px 0;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    align-items: center;
-}
-
-.cart-footer {
-    border-top: 1px solid #ddd;
-    padding-top: 15px;
-}
-
-.checkout-btn {
-    width: 100%;
-    padding: 12px;
-    background: #ffd700;
-    border: none;
-    font-weight: bold;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    .filters {
-        flex-wrap: wrap;
+// 1. Food Data Array (Simulating a Database)
+const foodData = [
+    {
+        id: 1,
+        name: "Schezwan Maggi",
+        category: "maggi",
+        price: 40,
+        desc: "Spicy noodles topped with crunchy veggies.",
+        img: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        id: 2,
+        name: "Veg Grilled Sandwich",
+        category: "canteen",
+        price: 50,
+        desc: "Loaded with cheese and fresh vegetables.",
+        img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        id: 3,
+        name: "Chicken Protein Salad",
+        category: "healthy",
+        price: 120,
+        desc: "Boiled chicken, lettuce, corn, and olive oil.",
+        img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        id: 4,
+        name: "Masala Chai",
+        category: "canteen",
+        price: 15,
+        desc: "The classic stress-buster for exams.",
+        img: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        id: 5,
+        name: "Oats & Banana Smoothie",
+        category: "healthy",
+        price: 80,
+        desc: "No sugar, pure energy pre-workout drink.",
+        img: "https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        id: 6,
+        name: "Cheese Burst Maggi",
+        category: "maggi",
+        price: 60,
+        desc: "Double cheese for late night cravings.",
+        img: "https://images.unsplash.com/photo-1594254258957-25299443657b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     }
-    .cart-modal {
-        width: 100%;
+];
+
+// 2. Select Elements
+const foodContainer = document.getElementById('food-grid');
+const cartCountElement = document.getElementById('cart-count');
+const cartOverlay = document.getElementById('cart-overlay');
+const cartItemsContainer = document.getElementById('cart-items');
+const totalPriceElement = document.getElementById('total-price');
+
+let cart = [];
+
+// 3. Render Food Items
+function displayFood(menuItems) {
+    let displayMenu = menuItems.map(function (item) {
+        return `<div class="food-card">
+                    <img src="${item.img}" alt="${item.name}">
+                    <div class="food-info">
+                        <h3>${item.name}</h3>
+                        <p>${item.desc}</p>
+                        <div class="price-row">
+                            <span class="price">₹${item.price}</span>
+                            <button class="add-btn" onclick="addToCart(${item.id})">Add +</button>
+                        </div>
+                    </div>
+                </div>`;
+    });
+    displayMenu = displayMenu.join("");
+    foodContainer.innerHTML = displayMenu;
+}
+
+// Initial Render
+window.addEventListener("DOMContentLoaded", function () {
+    displayFood(foodData);
+});
+
+// 4. Filtering Logic
+function filterMenu(category) {
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    if (category === 'all') {
+        displayFood(foodData);
+    } else {
+        const filteredMenu = foodData.filter(function (item) {
+            return item.category === category;
+        });
+        displayFood(filteredMenu);
+    }
+}
+
+// 5. Cart Logic
+function addToCart(id) {
+    // Check if item already exists in cart
+    if (cart.some((item) => item.id === id)) {
+        alert("Item already in cart!");
+    } else {
+        const item = foodData.find((product) => product.id === id);
+        cart.push({
+            ...item,
+            numberOfUnits: 1,
+        });
+    }
+    updateCart();
+}
+
+function updateCart() {
+    renderCartItems();
+    renderSubtotal();
+}
+
+function renderSubtotal() {
+    let totalPrice = 0;
+    let totalItems = 0;
+
+    cart.forEach((item) => {
+        totalPrice += item.price * item.numberOfUnits;
+        totalItems += item.numberOfUnits;
+    });
+
+    totalPriceElement.innerHTML = totalPrice;
+    cartCountElement.innerHTML = totalItems;
+}
+
+function renderCartItems() {
+    cartItemsContainer.innerHTML = ""; // Clear cart element
+    cart.forEach((item) => {
+        cartItemsContainer.innerHTML += `
+            <div class="cart-item">
+                <div class="item-info">
+                    <h4>${item.name}</h4>
+                    <h5>₹${item.price}</h5>
+                </div>
+                <div class="unit-controls">
+                    <span onclick="removeItem(${item.id})" style="color:red; cursor:pointer; font-size:0.8rem;">Remove</span>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function removeItem(id) {
+    cart = cart.filter((item) => item.id !== id);
+    updateCart();
+}
+
+// 6. UI Interaction (Modal)
+function toggleCart() {
+    if (cartOverlay.style.display === "flex") {
+        cartOverlay.style.display = "none";
+    } else {
+        cartOverlay.style.display = "flex";
+    }
+}
+
+function scrollToMenu() {
+    document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+}
+
+// 7. Checkout (Simulation)
+function checkout() {
+    if (cart.length > 0) {
+        alert("Order Placed! Your token number is " + Math.floor(Math.random() * 100));
+        cart = [];
+        updateCart();
+        toggleCart();
+    } else {
+        alert("Your cart is empty!");
     }
 }
